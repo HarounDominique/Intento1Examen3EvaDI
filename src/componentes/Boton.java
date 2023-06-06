@@ -7,15 +7,6 @@ import java.io.Serializable;
 public class Boton extends JButton implements Serializable {
     String titulo;
     Color colorFondo;
-    Boolean activo = false;
-
-    public Boolean getActivo() {
-        return activo;
-    }
-
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
-    }
 
     public Color getColorFondo() {
         return colorFondo;
