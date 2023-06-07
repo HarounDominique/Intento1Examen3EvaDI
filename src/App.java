@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class App extends JFrame {
@@ -14,10 +16,11 @@ public class App extends JFrame {
     JPanel miPanel2;
     Ficha miFicha;
     Boton miBoton;
+    //Ficha[] misFichas = new Ficha[9];
     ArrayList<Ficha> misFichas = new ArrayList<>();
     ArrayList<Color> misColores = new ArrayList<>();
 
-    public App() {
+    public App() throws IOException, ClassNotFoundException {
         misColores.add(Color.RED);
         misColores.add(Color.BLACK);
         misColores.add(Color.YELLOW);
@@ -30,7 +33,9 @@ public class App extends JFrame {
 
         miPanel = new JPanel();
         miPanel2 = new JPanel();
-        miBoton = new Boton("Start");
+        ObjectInputStream flujoEntrada = new ObjectInputStream(new FileInputStream("miBoton.obj"));
+        Boton miBoton = (Boton)flujoEntrada.readObject();
+        //miBoton = new Boton("Start");
         miPanel.setLayout(new GridLayout(3,3));
         this.add(miPanel, BorderLayout.CENTER);
         this.add(miBoton, BorderLayout.SOUTH);
@@ -45,7 +50,8 @@ public class App extends JFrame {
                         int numeroAleatorio = (int) (Math.random() * 9) + 1;
                         Ficha miFichaAux = (Ficha)e.getSource();
                         miFichaAux.setIndex(numeroAleatorio);
-                        miFichaAux.setText(String.valueOf(miFichaAux.getIndex()));                        miFichaAux.setColorFondo(misColores.get(numeroAleatorio-1));
+                        miFichaAux.setText(String.valueOf(miFichaAux.getIndex()));
+                        miFichaAux.setColorFondo(misColores.get(numeroAleatorio-1));
                     }
                 }
             });
