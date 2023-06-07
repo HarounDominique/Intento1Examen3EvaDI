@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class App extends JFrame {
 
-    Boolean operative = false;
+    Boolean active = false;
     JPanel miPanel;
     JPanel miPanel2;
     Ficha miFicha;
@@ -41,11 +41,11 @@ public class App extends JFrame {
             miFicha.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(operative){
+                    if(active){
                         int numeroAleatorio = (int) (Math.random() * 9) + 1;
                         Ficha miFichaAux = (Ficha)e.getSource();
                         miFichaAux.setIndex(numeroAleatorio);
-                        miFichaAux.setColorFondo(misColores.get(numeroAleatorio-1));
+                        miFichaAux.setText(String.valueOf(miFichaAux.getIndex()));                        miFichaAux.setColorFondo(misColores.get(numeroAleatorio-1));
                     }
                 }
             });
@@ -54,18 +54,18 @@ public class App extends JFrame {
         miBoton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(operative){
+                if(active){
                     miBoton.setText("Start");
                     miBoton.setBackground(Color.green);
-                   operative = false;
+                   active = false;
                 }else{
                     miBoton.setText("Stop");
                     miBoton.setBackground(Color.gray);
-                    operative = true;
+                    active = true;
                 }
 
                 for(int i = 0; i<9; i++){
-                    if(operative){
+                    if(active){
                         misFichas.get(i).mostrarNumero();
                     }else{
                         misFichas.get(i).ocultarNumero();
