@@ -69,9 +69,10 @@ public class App extends JFrame {
                     miBoton.setBackground(Color.gray);
                     active = true;
                 }
-
                 for(int i = 0; i<9; i++){
                     if(active){
+                        misFichas.get(i).setIndex(i+1);
+                        misFichas.get(i).setText(String.valueOf(i+1));
                         misFichas.get(i).mostrarNumero();
                     }else{
                         misFichas.get(i).ocultarNumero();
