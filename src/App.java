@@ -35,13 +35,18 @@ public class App extends JFrame {
         miPanel2 = new JPanel();
         ObjectInputStream flujoEntrada = new ObjectInputStream(new FileInputStream("miBoton.obj"));
         Boton miBoton = (Boton)flujoEntrada.readObject();
-        //miBoton = new Boton("Start");
+        //flujoEntrada = new ObjectInputStream(new FileInputStream("miFicha.obj"));
+        //Ficha miFicha = (Ficha)flujoEntrada.readObject();
+
         miPanel.setLayout(new GridLayout(3,3));
         this.add(miPanel, BorderLayout.CENTER);
         this.add(miBoton, BorderLayout.SOUTH);
 
         for(int i = 1; i<10; i++){
-            miPanel.add(miFicha = new Ficha(i));
+            flujoEntrada = new ObjectInputStream(new FileInputStream("miFicha.obj"));
+            Ficha miFicha = (Ficha)flujoEntrada.readObject();
+            miFicha.setIndex(i);
+            miPanel.add(miFicha);
             misFichas.add(miFicha);
             miFicha.addActionListener(new ActionListener() {
                 @Override
@@ -82,6 +87,7 @@ public class App extends JFrame {
             }
         });
 
+        flujoEntrada.close();
 
 
 
@@ -90,19 +96,4 @@ public class App extends JFrame {
         this.setSize(600, 600);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
-
-    /*
-    public static void main(String[] args) {
-        JPanel miPanel = new JPanel();
-        App miVentana = new App();
-        miPanel.setLayout(new GridLayout(3,3));
-        miVentana.add(miPanel);
-
-
-        miVentana.setVisible(true);
-        miVentana.setSize(600, 600);
-        miVentana.setDefaultCloseOperation(EXIT_ON_CLOSE);
-    }
-
-     */
 }

@@ -2,6 +2,9 @@ package componentes;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class Ficha extends JButton {
     int index;
@@ -56,5 +59,14 @@ public class Ficha extends JButton {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+
+    public static void main(String[] args) {
+        try(ObjectOutputStream flujoSalida = new ObjectOutputStream(new FileOutputStream("miFicha.obj"))){
+            Ficha miFicha = new Ficha();
+            flujoSalida.writeObject(miFicha);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }
